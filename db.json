@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Computer",
+      "price": 450000,
+      "quantity": "",
+      "selected": false,
+      "available": true
+    },
+    {
+      "id": 2,
+      "name": "Printer",
+      "price": 23000,
+      "quantity": 56,
+      "selected": false,
+      "available": true
+    },
+    {
+      "id": 3,
+      "name": "Smartphone",
+      "price": 650000,
+      "quantity": 46,
+      "selected": false,
+      "available": true
+    },
+    {
+      "id": 4,
+      "name": "Washing Machine",
+      "price": 37000,
+      "quantity": 100,
+      "selected": true,
+      "available": true
+    },
+    {
+      "name": "Product",
+      "price": "30",
+      "quantity": "23856",
+      "selected": true,
+      "available": true,
+      "id": 5
+    }
+  ]
+}
