@@ -11,24 +11,24 @@ export interface AppDataState<T> {
   errorMessage?: string;
 }
 
-export enum ProductQueryActions {
+export enum QueryActions {
 
   GET_ALL_PRODUCTS = '[Product] Get All Products',
   GET_SELECTED_PRODUCTS = '[Product] Get Selected Products',
   GET_AVAILABLE_PRODUCTS = '[Product] Get Available Products',
   SEARCH_PRODUCT = '[Product] Search Products',
-  NEW_PRODUCT = '[Product] Add New Product',
-  DELETE_PRODUCT = '[Product] Delete Product',
   SELECT_PRODUCT = '[Product] Select Product',
-  EDIT_PRODUCT = '[Product] Edit product',
+
 }
 
 /* On pouvait les regrouper dans ProductQueryActions */
 
-export enum ProductCommandActions {
-  /*DELETE_PRODUCT = '[Product] Delete Product',
-  SELECT_PRODUCT = '[Product] Select Product',
-  EDIT_PRODUCT = '[Product] Edit product',*/
+export enum CommandActions {
+  NEW_PRODUCT = '[Product] Add New Product',
+  DELETE_PRODUCT = '[Product] Delete Product',
+  EDIT_PRODUCT = '[Product] Edit product',
+  PRODUCT_ADDED = '[Product] Product added',
+  PRODUCT_UPDATED = '[Product] Product updated'
 }
 
 export interface ActionEvent<A, T> {

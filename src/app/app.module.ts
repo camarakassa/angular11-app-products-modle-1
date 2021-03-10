@@ -15,6 +15,7 @@ import {ProductsListComponent} from './components/products/products-list/product
 import {ProductsItemComponent} from './components/products/products-list/products-item/products-item.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
+import { StatsComponent } from './components/stats/stats.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {ToastrModule} from 'ngx-toastr';
     ProductEditComponent,
     ProductsNavBarComponent,
     ProductsListComponent,
-    ProductsItemComponent
+    ProductsItemComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,

@@ -3,9 +3,10 @@ import {ProductService} from '../../services/product.service';
 import {Product} from '../../model/product.model';
 import {Observable, of} from 'rxjs';
 import {catchError, map, startWith} from 'rxjs/operators';
-import {ActionEvent, AppDataState, DataStateEnum, ProductQueryActions} from '../../state/product.state';
+import {ActionEvent, AppDataState, CommandActions, DataStateEnum, QueryActions} from '../../state/product.state';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import {EventDriverService} from '../../services/event.driver.service';
 
 @Component({
   selector: 'app-products',
@@ -20,10 +21,15 @@ export class ProductsComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private router: Router,
-    private toastrService:ToastrService) {
+    private toastrService: ToastrService,
+    private eventDriverService: EventDriverService) {
   }
 
   ngOnInit(): void {
+    this.eventDriverService.sourceEventSubjectObservable
+      .subscribe((actionEvent:ActionEvent<any, any>)=>{
+        this.onActionEvent(actionEvent);
+      });
   }
 
   onGetAllProducts() {
@@ -113,32 +119,32 @@ export class ProductsComponent implements OnInit {
     this.router.navigateByUrl('/editProduct/' + product.id);
   }
 
-  onActionEvent($event: ActionEvent<ProductQueryActions, any>) {
+  onActionEvent($event: ActionEvent<any, any>) {
     switch ($event.type) {
       /*Les events pour product nav-bar*/
-      case ProductQueryActions.GET_ALL_PRODUCTS:
+      case QueryActions.GET_ALL_PRODUCTS:
         this.onGetAllProducts();
         break;
-      case ProductQueryActions.GET_SELECTED_PRODUCTS:
+      case QueryActions.GET_SELECTED_PRODUCTS:
         this.onGetSelectedProducts();
         break;
-      case ProductQueryActions.GET_AVAILABLE_PRODUCTS:
+      case QueryActions.GET_AVAILABLE_PRODUCTS:
         this.onGetAvailableProducts();
         break;
-      case ProductQueryActions.SEARCH_PRODUCT:
+      case QueryActions.SEARCH_PRODUCT:
         this.onSearch($event.payload);
         break;
-      case ProductQueryActions.NEW_PRODUCT:
+      case CommandActions.NEW_PRODUCT:
         this.onNewProduct();
         break;
       /*  les events pour product list */
-      case ProductQueryActions.SELECT_PRODUCT:
+      case QueryActions.SELECT_PRODUCT:
         this.onSelect($event.payload);
         break;
-      case ProductQueryActions.DELETE_PRODUCT:
+      case CommandActions.DELETE_PRODUCT:
         this.onDeleteProduct($event.payload);
         break;
-      case ProductQueryActions.EDIT_PRODUCT:
+      case CommandActions.EDIT_PRODUCT:
         this.onEditProduct($event.payload);
         break;
     }

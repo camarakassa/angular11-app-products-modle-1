@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ProductService} from '../../services/product.service';
 import {ToastrService} from 'ngx-toastr';
+import {Router} from '@angular/router';
+import {EventDriverService} from '../../services/event.driver.service';
+import {CommandActions} from '../../state/product.state';
 
 @Component({
   selector: 'app-product-add',
@@ -16,7 +19,9 @@ export class ProductAddComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
-    private toastrService: ToastrService) {
+    private toastrService: ToastrService,
+    private router:Router,
+    private eventDriverService:EventDriverService) {
 
   }
 
@@ -37,6 +42,8 @@ export class ProductAddComponent implements OnInit {
     }
     this.productService.save(this.productFormGroup?.value)
       .subscribe(data => {
+          this.eventDriverService.publishEvent({type:CommandActions.PRODUCT_ADDED});
+          this.router.navigateByUrl('/products');
           this.toastrService.success('Le produit a été ajouté avec succès !');
         },
         error => {

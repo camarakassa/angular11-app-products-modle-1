@@ -26,7 +26,6 @@
 
         <app-products-item
           [productInput]="product"
-          (productEventEmitter)="onActionEvent($event)"
           *ngFor="let product of result.data"
           style="display: contents">
 

@@ -5,7 +5,7 @@
       "name": "Computer",
       "price": 450000,
       "quantity": "10",
-      "selected": false,
+      "selected": true,
       "available": true
     },
     {
@@ -13,29 +13,29 @@
       "name": "Printer",
       "price": 23000,
       "quantity": 56,
-      "selected": true,
-      "available": true
+      "selected": false,
+      "available": false
     },
     {
       "id": 3,
       "name": "Smartphone",
       "price": 650000,
       "quantity": 46,
-      "selected": false,
-      "available": true
-    },
-    {
-      "id": 4,
-      "name": "Washing Machine",
-      "price": 37000,
-      "quantity": 100,
       "selected": true,
       "available": true
     },
     {
-      "name": "Mon produit",
-      "price": "400",
-      "quantity": "40",
+      "name": "Mon prod",
+      "price": "500",
+      "quantity": "30",
+      "selected": false,
+      "available": true,
+      "id": 4
+    },
+    {
+      "name": "Mon rpoduit",
+      "price": "405",
+      "quantity": "3",
       "selected": true,
       "available": true,
       "id": 5
