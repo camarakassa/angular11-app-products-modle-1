@@ -3,8 +3,9 @@ import {ProductService} from '../../services/product.service';
 import {Product} from '../../model/product.model';
 import {Observable, of} from 'rxjs';
 import {catchError, map, startWith} from 'rxjs/operators';
-import {AppDataState, DataStateEnum} from '../../state/product.state';
+import {ActionEvent, AppDataState, DataStateEnum, ProductQueryActions} from '../../state/product.state';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +19,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private router: Router) {
+    private router: Router,
+    private toastrService:ToastrService) {
   }
 
   ngOnInit(): void {
@@ -97,6 +99,7 @@ export class ProductsComponent implements OnInit {
       this.productService.delete(product)
         .subscribe(data => {
           this.onGetAllProducts();
+          this.toastrService.error('Le produit a bien été supprimé !');
         });
     }
 
@@ -108,5 +111,36 @@ export class ProductsComponent implements OnInit {
 
   onEditProduct(product: Product) {
     this.router.navigateByUrl('/editProduct/' + product.id);
+  }
+
+  onActionEvent($event: ActionEvent<ProductQueryActions, any>) {
+    switch ($event.type) {
+      /*Les events pour product nav-bar*/
+      case ProductQueryActions.GET_ALL_PRODUCTS:
+        this.onGetAllProducts();
+        break;
+      case ProductQueryActions.GET_SELECTED_PRODUCTS:
+        this.onGetSelectedProducts();
+        break;
+      case ProductQueryActions.GET_AVAILABLE_PRODUCTS:
+        this.onGetAvailableProducts();
+        break;
+      case ProductQueryActions.SEARCH_PRODUCT:
+        this.onSearch($event.payload);
+        break;
+      case ProductQueryActions.NEW_PRODUCT:
+        this.onNewProduct();
+        break;
+      /*  les events pour product list */
+      case ProductQueryActions.SELECT_PRODUCT:
+        this.onSelect($event.payload);
+        break;
+      case ProductQueryActions.DELETE_PRODUCT:
+        this.onDeleteProduct($event.payload);
+        break;
+      case ProductQueryActions.EDIT_PRODUCT:
+        this.onEditProduct($event.payload);
+        break;
+    }
   }
 }

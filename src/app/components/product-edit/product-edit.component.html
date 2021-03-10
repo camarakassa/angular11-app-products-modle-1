@@ -2,7 +2,7 @@
   <!--<div *ngIf="">
 
   </div>-->
-  <form  [formGroup]="productFormGroup">
+  <form [formGroup]="productFormGroup">
 
     <input type="text" formControlName="id" hidden>
     <div class="form-group">
@@ -16,16 +16,22 @@
 
     <div class="form-group">
       <label>Price</label>
-      <input type="text" class="form-control" formControlName="price">
+      <input type="text" class="form-control" formControlName="price"
+      [ngClass]="{'is-invalid':submitted && productFormGroup.controls.price.errors}">
+      <div *ngIf="submitted && productFormGroup.controls.price.errors" class="invalid-feedback">
+        <div *ngIf="productFormGroup.controls.price.errors.min">Veuillez sair une somme supérieur ou égal à 100 F</div>
+      </div>
     </div>
+
 
     <div class="form-group">
       <label>Quantity</label>
       <input type="text" class="form-control" formControlName="quantity"
              [ngClass]="{'is-invalid':submitted && productFormGroup.controls.quantity.errors}">
       <div *ngIf="submitted && productFormGroup.controls.quantity.errors" class="invalid-feedback">
-        <div *ngIf="productFormGroup.controls.quantity.errors.min">Vous devez disposer au moins un produit à enregistrer !</div>
-      </div>    </div>
+        <div *ngIf="productFormGroup.controls.quantity.errors.min">Vous devez disposer au moins un produit à enregistrer </div>
+      </div>
+    </div>
 
     <div class="form-group">
       <label>Selected</label>

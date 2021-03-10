@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../../services/product.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-edit',
@@ -18,7 +19,8 @@ export class ProductEditComponent implements OnInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private productService: ProductService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private toastrService:ToastrService) {
     this.productId = activateRoute.snapshot.params.id;
   }
 
@@ -28,7 +30,7 @@ export class ProductEditComponent implements OnInit {
         this.productFormGroup = this.formBuilder.group({
           id: [product.id],
           name: [product.name, [Validators.required, Validators.minLength(5)]],
-          price: [product.price, Validators.required],
+          price: [product.price, [Validators.required, Validators.min(100)]],
           quantity: [product.quantity, [Validators.required, Validators.min(1)]],
           selected: [product.selected, Validators.required],
           available: [product.available, Validators.required]
@@ -43,7 +45,7 @@ export class ProductEditComponent implements OnInit {
     }
     this.productService.updateProduct(this.productFormGroup?.value)
       .subscribe(data => {
-          alert('Le produit a été mise à jour avec succès !');
+          this.toastrService.warning('Le produit a été mise à jour avec succès !');
         },
         error => {
           console.log(error);

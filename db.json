@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Computer",
       "price": 450000,
-      "quantity": "",
+      "quantity": "10",
       "selected": false,
       "available": true
     },
@@ -13,7 +13,7 @@
       "name": "Printer",
       "price": 23000,
       "quantity": 56,
-      "selected": false,
+      "selected": true,
       "available": true
     },
     {
@@ -33,9 +33,9 @@
       "available": true
     },
     {
-      "name": "Product",
-      "price": "30",
-      "quantity": "23856",
+      "name": "Mon produit",
+      "price": "400",
+      "quantity": "40",
       "selected": true,
       "available": true,
       "id": 5
